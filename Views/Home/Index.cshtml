@@ -1,0 +1,36 @@
+﻿<html ng-app="Budgets">
+<head>
+    <style>
+        .neg { color: darkred; }
+        .pos { color: darkgreen }
+    </style>
+</head>
+
+<div ng-controller="BudgetsCtrl">
+       <div class="well well-sm">
+           <p style="font-size:25px; font-weight:bold" ng-class="getClass(left)">Balance: {{left | currency}}</p>
+     </div>
+    <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+    <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Category</th>
+            </tr>
+            <tr ng-repeat="t in transactions">
+                <td>{{t.Name}}</td>
+                <td ng-class="getClass(t.Amount)">{{t.Amount | currency }}</td>
+                <td>{{t.Category}}</td>
+            </tr>
+    </table>
+</div>
+</html>
+
+<!--<script src="~/lib-->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="~/lib/angular/angular.js"></script>
+<script src="~/js/BudgetsCtrl.js"></script>
+
