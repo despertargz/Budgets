@@ -18,24 +18,30 @@ namespace Budgets.Controllers
 
     public class BudgetsController : Controller
     {
-        // GET: api/values
-        [HttpGet, Route("budgets/{name}")]
-        public object Get(string name)
-        {
-            var transactions = new Transaction[]
+        static List<Transaction> Transactions = new List<Transaction>()
             {
                 new Transaction() { Amount = -25.99m, Category = "Bills", Name = "Rent" },
                 new Transaction() { Amount = 100.00m, Category = "Savings", Name = "Car" }
             };
 
+        // GET: api/values
+        [HttpGet, Route("budgets/{name}")]
+        public object Get(string name)
+        {
             return new
             {
-                transactions = transactions
+                transactions = Transactions
                     .Where(o => o.Amount >= 0)
                     .Concat(
-                        transactions.Where(o => o.Amount < 0)),
-                left = transactions.Sum(o => o.Amount)
+                        Transactions.Where(o => o.Amount < 0)),
+                left = Transactions.Sum(o => o.Amount)
             };
+        }
+
+        [HttpPost, Route("budgets/{name}")]
+        public void Post(string name, [FromBody]Transaction transaction)
+        {
+            Transactions.Add(transaction);
         }
     }
 }
