@@ -3,6 +3,8 @@
     <style>
         .neg { color: darkred; }
         .pos { color: darkgreen }
+        .transactionRow .showOnHover { display: none }
+        .transactionRow:hover .showOnHover { display: inline-block }
     </style>
 </head>
 
@@ -18,10 +20,19 @@
                 <th>Amount</th>
                 <th>Category</th>
             </tr>
-            <tr ng-repeat="t in transactions">
+            <tr ng-repeat="t in transactions" class="transactionRow">
                 <td>{{t.Name}}</td>
                 <td ng-class="getClass(t.Amount)">{{t.Amount | currency }}</td>
-                <td>{{t.Category}}</td>
+                <td>
+                    <div style="display:inline-block; width: 90%">
+                        {{t.Category}}
+                    </div>
+                    <div class="showOnHover">
+                        <button style="border:none; background: transparent">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td><input type="text" class="form-control" tabindex="1" ng-model="newName" id="newName"/></td>
