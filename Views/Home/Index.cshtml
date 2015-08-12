@@ -4,8 +4,8 @@
         .neg { color: darkred; }
         .pos { color: darkgreen }
         .transactionRow { cursor: pointer }
-        .transactionRow .showOnHover { display: none }
-        .transactionRow:hover .showOnHover { display: inline-block }
+        .transactionRow .showOnHover { visibility: hidden }
+        .transactionRow:hover .showOnHover { visibility: visible }
         .rowInput { border: none }
     </style>
 </head>
@@ -21,6 +21,7 @@
                 <th>Name</th>
                 <th>Amount</th>
                 <th>Category</th>
+                <th></th>
             </tr>
             <tr ng-repeat="t in transactions" class="transactionRow">
                 <td ng-click="editable(t, 'name', true)" my-focus>
@@ -36,17 +37,19 @@
                         <input class="form-control"  ng-show="showEdit(t, 'category')" ng-model="t.Category" ng-blur="editable(t, 'category', false)" />
                         <span ng-show="!showEdit(t, 'category')">{{t.Category}}</span>
                     </div>
-                    <div class="showOnHover">
-                        <button style="border:none; background: transparent">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </div>
+             
+                </td>
+                <td style="position:relative">
+                    <button class="showOnHover" style="border:none; background: transparent; position:absolute; right: 5px; top: 10px">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
                 </td>
             </tr>
             <tr>
                 <td><input type="text" class="form-control" tabindex="1" ng-model="newName" id="newName"/></td>
                 <td><input type="text" class="form-control" tabindex="2" ng-model="newAmount" /></td>
                 <td><input type="text" class="form-control" tabindex="3" ng-model="newCategory" ng-blur="addTransaction()" /></td>
+                <td></td>
             </tr>
     </table>
     </div>
