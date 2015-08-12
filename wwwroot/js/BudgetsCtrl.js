@@ -37,10 +37,14 @@ app.controller('BudgetsCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.newCategory = null;
     };
 
-    $scope.editable = function(transaction, isEditable, e) {
-        transaction.showEdit = isEditable;
-        //$(e.target).focus();
-    }
+    $scope.editable = function (transaction, column, isEditable) {
+        transaction.showEdit = {};
+        transaction.showEdit[column] = isEditable;
+    };
+
+    $scope.showEdit = function (transaction, column) {
+        return transaction.hasOwnProperty('showEdit') ? transaction.showEdit[column] : false;
+    };
 
     $scope.getTransactions();
 }]);

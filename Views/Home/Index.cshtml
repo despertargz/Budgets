@@ -23,18 +23,18 @@
                 <th>Category</th>
             </tr>
             <tr ng-repeat="t in transactions" class="transactionRow">
-                <td ng-click="editable(t, true)" my-focus>
-                    <input class="form-control" ng-show="t.showEdit" ng-model="t.Name" ng-blur="editable(t, false)" />
-                    <span ng-show="!t.showEdit">{{t.Name}}</span>
+                <td ng-click="editable(t, 'name', true)" my-focus>
+                    <input class="form-control" ng-show="showEdit(t, 'name')" ng-model="t.Name" ng-blur="editable(t, 'name', false)" />
+                    <span ng-show="!showEdit(t, 'name')">{{t.Name}}</span>
                 </td>
-                <td ng-class="getClass(t.Amount)" ng-click="editable(t, true)" my-focus >
-                    <input class="form-control" ng-show="t.showEdit" ng-model="t.Amount" ng-blur="editable(t, false)" />
-                    <span ng-show="!t.showEdit">{{t.Amount | currency}}</span>
+                <td ng-class="getClass(t.Amount)" ng-click="editable(t, 'amount', true)" my-focus >
+                    <input class="form-control" ng-show="showEdit(t, 'amount')" ng-model="t.Amount" ng-blur="editable(t, 'amount', false)" />
+                    <span ng-show="!showEdit(t, 'amount')">{{t.Amount | currency}}</span>
                 </td>
-                <td  ng-click="editable(t, true)" my-focus>
+                <td  ng-click="editable(t, 'category', true)" my-focus>
                     <div style="display:inline-block; width: 90%">
-                        <input class="form-control"  ng-show="t.showEdit" ng-model="t.Category" ng-blur="editable(t, false)" />
-                        <span ng-show="!t.showEdit">{{t.Category}}</span>
+                        <input class="form-control"  ng-show="showEdit(t, 'category')" ng-model="t.Category" ng-blur="editable(t, 'category', false)" />
+                        <span ng-show="!showEdit(t, 'category')">{{t.Category}}</span>
                     </div>
                     <div class="showOnHover">
                         <button style="border:none; background: transparent">
