@@ -37,5 +37,20 @@ app.controller('BudgetsCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.newCategory = null;
     };
 
+    $scope.editable = function(transaction, isEditable, e) {
+        transaction.showEdit = isEditable;
+        //$(e.target).focus();
+    }
+
     $scope.getTransactions();
+}]);
+
+app.directive('myFocus', ['$timeout', function ($timeout) {
+    return {
+        link: function (scope, element) {
+            element.on('click', function () {
+                element.find('input').focus();
+            });
+        }
+    };
 }]);

@@ -3,8 +3,10 @@
     <style>
         .neg { color: darkred; }
         .pos { color: darkgreen }
+        .transactionRow { cursor: pointer }
         .transactionRow .showOnHover { display: none }
         .transactionRow:hover .showOnHover { display: inline-block }
+        .rowInput { border: none }
     </style>
 </head>
 
@@ -21,11 +23,18 @@
                 <th>Category</th>
             </tr>
             <tr ng-repeat="t in transactions" class="transactionRow">
-                <td>{{t.Name}}</td>
-                <td ng-class="getClass(t.Amount)">{{t.Amount | currency }}</td>
-                <td>
+                <td ng-click="editable(t, true)" my-focus>
+                    <input class="form-control" ng-show="t.showEdit" ng-model="t.Name" ng-blur="editable(t, false)" />
+                    <span ng-show="!t.showEdit">{{t.Name}}</span>
+                </td>
+                <td ng-class="getClass(t.Amount)" ng-click="editable(t, true)" my-focus >
+                    <input class="form-control" ng-show="t.showEdit" ng-model="t.Amount" ng-blur="editable(t, false)" />
+                    <span ng-show="!t.showEdit">{{t.Amount | currency}}</span>
+                </td>
+                <td  ng-click="editable(t, true)" my-focus>
                     <div style="display:inline-block; width: 90%">
-                        {{t.Category}}
+                        <input class="form-control"  ng-show="t.showEdit" ng-model="t.Category" ng-blur="editable(t, false)" />
+                        <span ng-show="!t.showEdit">{{t.Category}}</span>
                     </div>
                     <div class="showOnHover">
                         <button style="border:none; background: transparent">
